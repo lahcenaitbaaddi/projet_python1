@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Login - Boutique{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card p-4 shadow-sm">
+      <h3 class="mb-3">Se connecter</h3>
+      <form method="post" action="{{ url_for('login') }}">
+        <div class="mb-3">
+          <label class="form-label">Nom d'utilisateur</label>
+          <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <button class="btn btn-primary">Se connecter</button>
+        <a href="{{ url_for('register') }}" class="btn btn-link">Créer un compte</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

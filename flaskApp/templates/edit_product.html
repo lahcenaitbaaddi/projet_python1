@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Modifier Produit{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h3>✏ Modifier le Produit</h3>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <label>Nom</label>
+        <input type="text" name="name" value="{{ product.name }}" class="form-control" required>
+
+        <label class="mt-2">Prix</label>
+        <input type="number" name="price" value="{{ product.price }}" step="0.01" class="form-control" required>
+
+        <label class="mt-2">Promo</label>
+        <input type="text" name="promo" value="{{ product.promo }}" class="form-control">
+
+        <label class="mt-2">Description</label>
+        <textarea name="description" class="form-control" rows="5">{{ product.description }}</textarea>
+
+        <label class="mt-2">Image</label><br>
+        {% if product.image %}
+            <img src="/uploads/{{ product.image }}" width="100" class="mb-2"><br>
+        {% endif %}
+        <input type="file" name="image" class="form-control">
+
+        <button class="btn btn-primary mt-3">💾 Enregistrer</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary mt-3">Retour</a>
+    </form>
+</div>
+{% endblock %}

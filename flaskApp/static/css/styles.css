@@ -1,0 +1,18 @@
+/* dark mode */
+body.dark {
+    background:#121212;
+    color:#eaeaea;
+  }
+  body.dark .navbar, body.dark .card {
+    background:#1e1e1e;
+    color:#eaeaea;
+    border-color:#2b2b2b;
+  }
+  /* product card hover animation */
+  .card:hover {
+    transform: translateY(-6px);
+    transition: transform .2s ease;
+  }
+  /* remove text decoration in links */
+  a { text-decoration: none; }
+  

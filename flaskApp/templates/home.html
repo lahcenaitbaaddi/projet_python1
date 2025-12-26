@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Accueil - Boutique{% endblock %}
+{% block content %}
+
+<h1 class="mb-4">Produits</h1>
+
+<!-- Barre de recherche -->
+<form method="GET" action="{{ url_for('home') }}" class="row g-2 mb-4">
+  <div class="col-md-4">
+    <input type="text" name="q" class="form-control" placeholder="Rechercher un produit..." value="{{ request.args.get('q','') }}">
+  </div>
+  <div class="col-md-2">
+    <input type="number" name="min_price" class="form-control" placeholder="Prix min" step="0.01" value="{{ request.args.get('min_price','') }}">
+  </div>
+  <div class="col-md-2">
+    <input type="number" name="max_price" class="form-control" placeholder="Prix max" step="0.01" value="{{ request.args.get('max_price','') }}">
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+  </div>
+</form>
+
+<div class="row g-4">
+  {% for p in products %}
+  <div class="col-md-4">
+    <div class="card h-100 animate__animated animate__fadeInUp">
+      {% if p.image %}
+      <img src="{{ url_for('uploads', filename=p.image) }}" class="card-img-top" style="height:250px;object-fit:cover;">
+      {% endif %}
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ p.name }}</h5>
+        <p class="card-text text-truncate">{{ p.description or '' }}</p>
+        <div class="mt-auto">
+          {% if p.promo %}
+            <span class="badge bg-success">Promo: {{ p.promo }}</span>
+          {% endif %}
+          <h5 class="mt-2">{{ p.price }} MAD</h5>
+          <div class="d-flex justify-content-between mt-3">
+            <a href="{{ url_for('product_page', pid=p._id) }}" class="btn btn-primary btn-sm">Voir</a>
+            <form action="{{ url_for('cart_add', pid=p._id) }}" method="post">
+              <input type="hidden" name="qty" value="1">
+              <button class="btn btn-outline-secondary btn-sm">Ajouter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
